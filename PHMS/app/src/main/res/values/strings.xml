@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">PHMSapp</string>
+    <string name="register">Register</string>
+    <string name="email">Email</string>
 </resources>
