@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onComplete(@NonNull Task<AuthResult>task){
                 if(task.isSuccessful()) {
-                    // startActivity(new Intent(MainActivity.this, Homepage.class));
+                    startActivity(new Intent(MainActivity.this, Dashboard.class));
                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                     if (user.isEmailVerified()) {
                         startActivity(new Intent(MainActivity.this, Dashboard.class));
