@@ -1,8 +1,5 @@
 package com.example.phmsapp;
 
-import com.example.phmsapp.regLog.RegisterUser;
-import com.example.phmsapp.regLog.ForgotPassword;
-
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -96,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onComplete(@NonNull Task<AuthResult>task){
                 if(task.isSuccessful()) {
-                    // startActivity(new Intent(MainActivity.this, Homepage.class));
+                    startActivity(new Intent(MainActivity.this, Dashboard.class));
                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                     if (user.isEmailVerified()) {
                         startActivity(new Intent(MainActivity.this, Dashboard.class));
@@ -113,22 +110,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
     }
 }
-
-
-//package com.example.phmsapp;
-//
-//import androidx.appcompat.app.AppCompatActivity;
-//
-//import android.os.Bundle;
-//
-//public class MainActivity extends AppCompatActivity {
-//
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_main);
-//    }
-//}
 
 
 

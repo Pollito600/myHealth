@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".NotesActivity">
+
+    <ListView
+        android:id="@+id/notes_listview"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_above="@+id/new_note_button"
+        android:layout_alignParentTop="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/new_note_button"
+        android:layout_width="112dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="683dp"
+        android:text="New Note"
+        app:layout_constraintBottom_toBottomOf="@+id/notes_listview"
+        app:layout_constraintEnd_toStartOf="@+id/modify_note_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/notes_listview" />
+
+    <Button
+        android:id="@+id/open_note_button"
+        android:layout_width="119dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="8dp"
+        android:layout_toStartOf="@id/modify_note_button"
+        android:text="Open Note"
+        app:layout_constraintBottom_toBottomOf="@+id/modify_note_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/modify_note_button"
+        app:layout_constraintTop_toTopOf="@+id/notes_listview" />
+
+    <Button
+        android:id="@+id/modify_note_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="Modify Note"
+        app:layout_constraintBottom_toBottomOf="@+id/new_note_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/note_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?attr/textAppearanceListItem"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/note_content"
+        app:layout_constraintEnd_toEndOf="@+id/notes_listview"
+        app:layout_constraintStart_toStartOf="@+id/notes_listview"
+        app:layout_constraintTop_toBottomOf="@+id/new_note_button" />
+
+    <TextView
+        android:id="@+id/note_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?attr/textAppearanceListItem"
+        app:layout_constraintBottom_toTopOf="@+id/new_note_button"
+        app:layout_constraintEnd_toEndOf="@+id/notes_listview"
+        app:layout_constraintStart_toStartOf="@+id/notes_listview"
+        app:layout_constraintTop_toBottomOf="@+id/note_title" />
+</androidx.constraintlayout.widget.ConstraintLayout>

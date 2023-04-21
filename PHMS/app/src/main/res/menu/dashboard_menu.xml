@@ -1,0 +1,22 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_diet"
+        android:icon="@drawable/ic_diet"
+        android:title="Diet"/>
+    <item
+        android:id="@+id/menu_medication"
+        android:icon="@drawable/ic_medication"
+        android:title="Medication"/>
+    <item
+        android:id="@+id/menu_notes"
+        android:icon="@drawable/ic_notes"
+        android:title="Notes"/>
+    <item
+        android:id="@+id/menu_search"
+        android:icon="@drawable/ic_search"
+        android:title="Search"/>
+    <item
+        android:id="@+id/menu_vital_signs"
+        android:icon="@drawable/ic_vitalsigns"
+        android:title="Vital Signs"/>
+</menu>
