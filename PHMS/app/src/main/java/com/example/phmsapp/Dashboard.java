@@ -25,22 +25,22 @@ public class Dashboard extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            /*case R.id.menu_diet:
+            case R.id.menu_diet:
                 startActivity(new Intent(this, DietActivity.class));
                 return true;
             case R.id.menu_medication:
                 startActivity(new Intent(this, MedicationActivity.class));
-                return true;*/
+                return true;
             case R.id.menu_notes:
                 startActivity(new Intent(this, NotesActivity.class));
                 Log.d("NotesActivity", "onCreate() called");
                 return true;
-            /*case R.id.menu_search:
+            case R.id.menu_search:
                 startActivity(new Intent(this, SearchActivity.class));
                 return true;
             case R.id.menu_vital_signs:
                 startActivity(new Intent(this, VitalSignsActivity.class));
-                return true;*/
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
