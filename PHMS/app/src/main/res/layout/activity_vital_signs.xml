@@ -1,10 +1,83 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_vital_signs"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".VitalSignsActivity">
 
-  </androidx.constraintlayout.widget.ConstraintLayout>
+  <TextView
+      android:id="@+id/textViewBloodPressure"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Blood pressure (mmHg):"
+      android:textSize="18sp"
+      android:layout_marginTop="16dp"
+      android:layout_marginLeft="16dp"/>
+
+  <EditText
+      android:id="@+id/editTextBloodPressure"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:inputType="numberDecimal"
+      android:ems="10"
+      android:layout_toRightOf="@+id/textViewBloodPressure"
+      android:layout_alignBaseline="@+id/textViewBloodPressure"/>
+
+  <TextView
+      android:id="@+id/textViewHeartRate"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Heart rate (bpm):"
+      android:textSize="18sp"
+      android:layout_below="@+id/textViewBloodPressure"
+      android:layout_marginTop="16dp"
+      android:layout_marginLeft="16dp"/>
+
+  <EditText
+      android:id="@+id/editTextHeartRate"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:inputType="numberDecimal"
+      android:ems="10"
+      android:layout_toRightOf="@+id/textViewHeartRate"
+      android:layout_alignBaseline="@+id/textViewHeartRate"/>
+
+  <TextView
+      android:id="@+id/textViewOxygenSaturation"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Oxygen saturation (%):"
+      android:textSize="18sp"
+      android:layout_below="@+id/textViewHeartRate"
+      android:layout_marginTop="16dp"
+      android:layout_marginLeft="16dp"/>
+
+  <EditText
+      android:id="@+id/editTextOxygenSaturation"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:inputType="numberDecimal"
+      android:ems="10"
+      android:layout_toRightOf="@+id/textViewOxygenSaturation"
+      android:layout_alignBaseline="@+id/textViewOxygenSaturation"/>
+
+  <Button
+      android:id="@+id/buttonSave"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Save"
+      android:layout_below="@+id/editTextOxygenSaturation"
+      android:layout_marginTop="16dp"
+      android:layout_alignParentEnd="true"
+      android:layout_alignParentRight="true"/>
+
+  <TextView
+      android:id="@+id/textViewSavedValues"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:textSize="18sp"
+      android:layout_below="@+id/buttonSave"
+      android:layout_marginTop="16dp"
+      android:layout_marginLeft="16dp"/>
+
+</RelativeLayout>
