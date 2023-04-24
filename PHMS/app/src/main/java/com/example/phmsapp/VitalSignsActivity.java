@@ -1,7 +1,6 @@
 package com.example.phmsapp;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 
 public class VitalSignsActivity extends AppCompatActivity {
