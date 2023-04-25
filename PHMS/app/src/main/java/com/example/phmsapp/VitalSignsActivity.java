@@ -43,9 +43,10 @@ public class VitalSignsActivity extends AppCompatActivity {
         String savedHeartRate = sharedPreferences.getString("heart_rate", "");
         String savedOxygenSaturation = sharedPreferences.getString("oxygen_saturation", "");
         String savedBodyTemperature = sharedPreferences.getString("body_temperature", "");
-        if (!savedBloodPressure.isEmpty() && !savedHeartRate.isEmpty() && !savedOxygenSaturation.isEmpty()) {
-            textViewSavedValues.setText("Last saved vital signs: Blood pressure = " + savedBloodPressure +
-                    ", Heart rate = " + savedHeartRate + ", Oxygen saturation = " + savedOxygenSaturation + ", Body Temperature = " + savedBodyTemperature);
+        String savedDate = sharedPreferences.getString("date", "");
+        if (!savedBloodPressure.isEmpty() && !savedHeartRate.isEmpty() && !savedOxygenSaturation.isEmpty() && !savedDate.isEmpty()) {
+            textViewSavedValues.setText("Last saved vital signs: Blood pressure= " + savedBloodPressure +
+                    ", Heart rate= " + savedHeartRate + ", Oxygen saturation= " + savedOxygenSaturation + ", Body Temperature= " + savedBodyTemperature + ", Date: " + savedDate);
         }
 
         // Load history
@@ -65,10 +66,10 @@ public class VitalSignsActivity extends AppCompatActivity {
                 String heartRate = editTextHeartRate.getText().toString().trim();
                 String oxygenSaturation = editTextOxygenSaturation.getText().toString().trim();
                 String BodyTemperature = editTextBodyTemperature.getText().toString().trim();
-                String TextDate = editTextDate.getText().toString().trim();
+                String Date = editTextDate.getText().toString().trim();
 
                 // Validate the entered values
-                if (bloodPressure.isEmpty() || heartRate.isEmpty() || oxygenSaturation.isEmpty() || BodyTemperature.isEmpty() || TextDate.isEmpty()) {
+                if (bloodPressure.isEmpty() || heartRate.isEmpty() || oxygenSaturation.isEmpty() || BodyTemperature.isEmpty() || Date.isEmpty()) {
                     Toast.makeText(VitalSignsActivity.this, "Please enter all vital signs values", Toast.LENGTH_SHORT).show();
                 } else if (!isNumeric(bloodPressure) || !isNumeric(heartRate) || !isNumeric(oxygenSaturation) || !isNumeric(BodyTemperature)) {
                     Toast.makeText(VitalSignsActivity.this, "Please enter valid vital signs values", Toast.LENGTH_SHORT).show();
@@ -79,10 +80,11 @@ public class VitalSignsActivity extends AppCompatActivity {
                     editor.putString("heart_rate", heartRate);
                     editor.putString("oxygen_saturation", oxygenSaturation);
                     editor.putString("body_temperature", BodyTemperature);
+                    editor.putString("Date", Date);
                     editor.apply();
 
                     // Get the saved values from history and add the new entry to history
-                    String savedValues = "Blood pressure = " + bloodPressure + ", Heart rate = " + heartRate + ", Oxygen saturation = " + oxygenSaturation + ", Body Temperature = " + BodyTemperature;
+                    String savedValues = "Blood pressure= " + bloodPressure + ", Heart rate= " + heartRate + ", Oxygen saturation= " + oxygenSaturation + ", Body Temperature= " + BodyTemperature + ", Date: " + Date;
                     history.add(0, savedValues);
                     if (history.size() > 15) {
                         history.remove(history.size() - 1);
@@ -124,13 +126,13 @@ public class VitalSignsActivity extends AppCompatActivity {
                     int numEntriesToShow = Math.min(10, historyList.size());
                     String historyToShow = "";
                     for (int i = 0; i < numEntriesToShow; i++) {
-                        historyToShow += historyList.get(i) + "\n";
+                        historyToShow += historyList.get(i) + "\n" + "\n";
                     }
 
                     // Create and show the dialog
                     AlertDialog.Builder builder = new AlertDialog.Builder(VitalSignsActivity.this);
                     builder.setTitle("History");
-                    builder.setMessage("Last " + numEntriesToShow + " entries:\n" + historyToShow);
+                    builder.setMessage("Last " + numEntriesToShow + " entries:\n\n" + historyToShow);
                     builder.setPositiveButton("OK", null);
                     AlertDialog dialog = builder.create();
                     dialog.show();
