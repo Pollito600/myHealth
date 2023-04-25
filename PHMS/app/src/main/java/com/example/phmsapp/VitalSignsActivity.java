@@ -3,6 +3,7 @@ package com.example.phmsapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -14,6 +15,8 @@ import androidx.appcompat.app.AlertDialog;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class VitalSignsActivity extends AppCompatActivity {
 
@@ -71,7 +74,7 @@ public class VitalSignsActivity extends AppCompatActivity {
                 // Validate the entered values
                 if (bloodPressure.isEmpty() || heartRate.isEmpty() || oxygenSaturation.isEmpty() || BodyTemperature.isEmpty() || Date.isEmpty()) {
                     Toast.makeText(VitalSignsActivity.this, "Please enter all vital signs values", Toast.LENGTH_SHORT).show();
-                } else if (!isNumeric(bloodPressure) || !isNumeric(heartRate) || !isNumeric(oxygenSaturation) || !isNumeric(BodyTemperature)) {
+                } else if (!isNumeric(bloodPressure) || !isNumeric(heartRate) || !isNumeric(oxygenSaturation) || !isNumeric(BodyTemperature) || isDateValid(Date, "MM/DD/YYYY")) {
                     Toast.makeText(VitalSignsActivity.this, "Please enter valid vital signs values", Toast.LENGTH_SHORT).show();
                 } else {
                     // Save the entered values
@@ -151,5 +154,26 @@ public class VitalSignsActivity extends AppCompatActivity {
             return false;
         }
         return true;
+    }
+
+    public static boolean isDateValid(String dateStr, String format) {
+        try {
+            // Create a DateTimeFormatter object with the expected format
+            DateTimeFormatter formatter = null;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                formatter = DateTimeFormatter.ofPattern(format);
+            }
+
+            // Parse the date string using the formatter
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                LocalDate.parse(dateStr, formatter);
+            }
+
+            // If parsing is successful, return True
+            return true;
+        } catch (Exception e) {
+            // If parsing fails, return False
+            return false;
+        }
     }
 }
