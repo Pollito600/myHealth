@@ -1,83 +1,96 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_vital_signs"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
     tools:context=".VitalSignsActivity">
 
   <TextView
-      android:id="@+id/textViewBloodPressure"
-      android:layout_width="wrap_content"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:text="Blood pressure (mmHg):"
-      android:textSize="18sp"
-      android:layout_marginTop="16dp"
-      android:layout_marginLeft="16dp"/>
+      android:text="Enter Vital Signs"
+      android:textSize="20sp"
+      android:textStyle="bold" />
+
+  <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="Blood Pressure (mmHg)" />
 
   <EditText
       android:id="@+id/editTextBloodPressure"
-      android:layout_width="wrap_content"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:inputType="numberDecimal"
-      android:ems="10"
-      android:layout_toRightOf="@+id/textViewBloodPressure"
-      android:layout_alignBaseline="@+id/textViewBloodPressure"/>
+      android:inputType="numberDecimal" />
 
   <TextView
-      android:id="@+id/textViewHeartRate"
-      android:layout_width="wrap_content"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:text="Heart rate (bpm):"
-      android:textSize="18sp"
-      android:layout_below="@+id/textViewBloodPressure"
-      android:layout_marginTop="16dp"
-      android:layout_marginLeft="16dp"/>
+      android:text="Heart Rate (bpm)" />
 
   <EditText
       android:id="@+id/editTextHeartRate"
-      android:layout_width="wrap_content"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:inputType="numberDecimal"
-      android:ems="10"
-      android:layout_toRightOf="@+id/textViewHeartRate"
-      android:layout_alignBaseline="@+id/textViewHeartRate"/>
+      android:inputType="number" />
 
   <TextView
-      android:id="@+id/textViewOxygenSaturation"
-      android:layout_width="wrap_content"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:text="Oxygen saturation (%):"
-      android:textSize="18sp"
-      android:layout_below="@+id/textViewHeartRate"
-      android:layout_marginTop="16dp"
-      android:layout_marginLeft="16dp"/>
+      android:text="Oxygen Saturation (%)" />
 
   <EditText
       android:id="@+id/editTextOxygenSaturation"
-      android:layout_width="wrap_content"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:inputType="numberDecimal"
-      android:ems="10"
-      android:layout_toRightOf="@+id/textViewOxygenSaturation"
-      android:layout_alignBaseline="@+id/textViewOxygenSaturation"/>
+      android:inputType="numberDecimal" />
+
+  <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="Body Temperature (°F)" />
+
+  <EditText
+      android:id="@+id/editTextBodyTemperature"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:inputType="numberDecimal" />
+
+  <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="Date (MM/DD/YYYY)" />
+
+  <EditText
+      android:id="@+id/editTextDate"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:inputType="date" />
 
   <Button
       android:id="@+id/buttonSave"
-      android:layout_width="wrap_content"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:text="Save"
-      android:layout_below="@+id/editTextOxygenSaturation"
-      android:layout_marginTop="16dp"
-      android:layout_alignParentEnd="true"
-      android:layout_alignParentRight="true"/>
+      android:text="Save Vital Signs" />
 
   <TextView
       android:id="@+id/textViewSavedValues"
-      android:layout_width="wrap_content"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:textSize="18sp"
-      android:layout_below="@+id/buttonSave"
-      android:layout_marginTop="16dp"
-      android:layout_marginLeft="16dp"/>
+      android:layout_marginTop="16dp" />
 
-</RelativeLayout>
+  <Button
+      android:id="@+id/buttonHistory"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="History" />
+
+  <TextView
+      android:id="@+id/textViewSavedValues"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="16dp" />
+
+</LinearLayout>
