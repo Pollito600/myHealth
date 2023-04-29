@@ -22,7 +22,6 @@ public class Dashboard extends AppCompatActivity {
         dashNotesBtn = findViewById(R.id.btnNotes);
         dashDietBtn = findViewById(R.id.btnDiet);
         dashMedicationBtn = findViewById(R.id.btnMedication);
-        dashSearchBtn = findViewById(R.id.btnSearch);
         dashVitalSignsBtn = findViewById(R.id.btnVitalSigns);
         dashNotesBtn.setOnClickListener(new View.OnClickListener()
         {
@@ -48,14 +47,7 @@ public class Dashboard extends AppCompatActivity {
                 startActivity(new Intent(Dashboard.this, MedicationActivity.class));
             }
         });
-        dashSearchBtn.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                startActivity(new Intent(Dashboard.this, MedicationActivity.class));
-            }
-        });
+
         dashVitalSignsBtn.setOnClickListener(new View.OnClickListener()
         {
             @Override

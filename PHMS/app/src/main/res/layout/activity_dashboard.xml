@@ -57,15 +57,6 @@
                 android:text="Notes"
                 android:textSize="24sp" />
 
-            <!-- Add a button for the Search section -->
-            <Button
-                android:id="@+id/btnSearch"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:text="Search"
-                android:textSize="24sp" />
-
             <!-- Add a button for the Vital Signs section -->
             <Button
                 android:id="@+id/btnVitalSigns"
