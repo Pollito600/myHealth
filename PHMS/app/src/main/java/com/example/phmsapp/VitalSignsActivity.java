@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
@@ -68,55 +67,86 @@ public class VitalSignsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Get the entered values from the EditText views
-                // Get the entered values from the EditText views
                 String bloodPressure = editTextBloodPressure.getText().toString().trim();
                 String heartRate = editTextHeartRate.getText().toString().trim();
                 String oxygenSaturation = editTextOxygenSaturation.getText().toString().trim();
                 String BodyTemperature = editTextBodyTemperature.getText().toString().trim();
                 String Date = selectedDate.trim();
 
-
-                // Validate the entered values
-                if (bloodPressure.isEmpty() || heartRate.isEmpty() || oxygenSaturation.isEmpty() || BodyTemperature.isEmpty() || Date.isEmpty()) {
-                    Toast.makeText(VitalSignsActivity.this, "Please enter all vital signs values", Toast.LENGTH_SHORT).show();
-                } else if (!isNumberFormat(bloodPressure) || isNumeric(heartRate) || isNumeric(oxygenSaturation) || isNumeric(BodyTemperature) || isDateValid(Date, "MM/DD/YYYY")) {
-                    Toast.makeText(VitalSignsActivity.this, "Please enter valid vital signs values", Toast.LENGTH_SHORT).show();
+                // Check if the entered values are valid and if not, make the field turn red
+                boolean isInvalid = false;
+                if (bloodPressure.isEmpty() || !isNumberFormat(bloodPressure)) {
+                    editTextBloodPressure.setBackgroundColor(Color.RED);
+                    isInvalid = true;
                 } else {
-                    // Save the entered values
-                    // Save the entered values
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putString("blood_pressure", bloodPressure);
-                    editor.putString("heart_rate", heartRate);
-                    editor.putString("oxygen_saturation", oxygenSaturation);
-                    editor.putString("body_temperature", BodyTemperature);
-                    editor.putString("date", Date);
-                    editor.apply();
-
-
-                    // Get the saved values from history and add the new entry to history
-                    String savedValues = "\n-Blood pressure: " + bloodPressure + " mmHg" + "\n-Heart rate: " + heartRate + " bpm" + "\n-Oxygen saturation: " + oxygenSaturation + " %" + "\n-Body Temperature: " + BodyTemperature + " °F" + "\n Date: " + Date;
-                    history.add(0, savedValues);
-                    if (history.size() > 15) {
-                        history.remove(history.size() - 1);
-                    }
-                    StringBuilder historyString = new StringBuilder();
-                    for (int i = 0; i < history.size(); i++) {
-                        historyString.append(history.get(i)).append("\n");
-                    }
-                    editor.putString("history", historyString.toString().trim());
-                    editor.apply();
-
-                    Toast.makeText(VitalSignsActivity.this, "Vital signs saved: " + savedValues, Toast.LENGTH_SHORT).show();
-
-                    // Clear the fields
-                    editTextBloodPressure.getText().clear();
-                    editTextHeartRate.getText().clear();
-                    editTextOxygenSaturation.getText().clear();
-                    editTextBodyTemperature.getText().clear();
-                    editTextDate.getText().clear();
+                    editTextBloodPressure.setBackgroundColor(Color.TRANSPARENT);
                 }
+                if (heartRate.isEmpty() || isNumeric(heartRate)) {
+                    editTextHeartRate.setBackgroundColor(Color.RED);
+                    isInvalid = true;
+                } else {
+                    editTextHeartRate.setBackgroundColor(Color.TRANSPARENT);
+                }
+                if (oxygenSaturation.isEmpty() || isNumeric(oxygenSaturation)) {
+                    editTextOxygenSaturation.setBackgroundColor(Color.RED);
+                    isInvalid = true;
+                } else {
+                    editTextOxygenSaturation.setBackgroundColor(Color.TRANSPARENT);
+                }
+                if (BodyTemperature.isEmpty() || isNumeric(BodyTemperature)) {
+                    editTextBodyTemperature.setBackgroundColor(Color.RED);
+                    isInvalid = true;
+                } else {
+                    editTextBodyTemperature.setBackgroundColor(Color.TRANSPARENT);
+                }
+                if (Date.isEmpty() || isDateValid(Date, "MM/DD/YYYY")) {
+                    editTextDate.setBackgroundColor(Color.RED);
+                    isInvalid = true;
+                } else {
+                    editTextDate.setBackgroundColor(Color.TRANSPARENT);
+                }
+
+                if (isInvalid) {
+                    Toast.makeText(VitalSignsActivity.this, "Please enter valid vital signs values", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // Save the entered values
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("blood_pressure", bloodPressure);
+                editor.putString("heart_rate", heartRate);
+                editor.putString("oxygen_saturation", oxygenSaturation);
+                editor.putString("body_temperature", BodyTemperature);
+                editor.putString("date", Date);
+                editor.apply();
+
+                // Get the saved values from history and add the new entry to history
+                String savedValues = "\n-Blood pressure: " + bloodPressure + " mmHg" + "\n-Heart rate: " + heartRate + " bpm" + "\n-Oxygen saturation: " + oxygenSaturation + " %" + "\n-Body Temperature: " + BodyTemperature + " °F" + "\n Date: " + Date;
+                history.add(0, savedValues);
+                if (history.size() > 15) {
+                    history.remove(history.size() - 1);
+                }
+                StringBuilder historyString = new StringBuilder();
+                for (int i = 0; i < history.size(); i++) {
+                    historyString.append(history.get(i)).append("\n");
+                }
+                editor.putString("history", historyString.toString().trim());
+                editor.apply();
+
+                Toast.makeText(VitalSignsActivity.this, "Vital signs saved: " + savedValues, Toast.LENGTH_SHORT).show();
+
+                // Clear the fields
+                editTextBloodPressure.getText().clear();
+                editTextHeartRate.getText().clear();
+                editTextOxygenSaturation.getText().clear();
+                editTextBodyTemperature.getText().clear();
+                editTextDate.getText().clear();
+
+                // Reset the selected date
+                selectedDate = "";
             }
         });
+
 
         buttonHistory.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -146,7 +176,6 @@ public class VitalSignsActivity extends AppCompatActivity {
                             }
                             editor.apply();
                             history.clear();
-                            //textViewSavedValues.setText("");
                             Toast.makeText(VitalSignsActivity.this, "History cleared", Toast.LENGTH_SHORT).show();
                         }
                     });
@@ -173,13 +202,10 @@ public class VitalSignsActivity extends AppCompatActivity {
         // Create a DatePickerDialog with the current date as a default date
         DatePickerDialog datePickerDialog = new DatePickerDialog(
                 VitalSignsActivity.this,
-                new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                        // Store the selected date in the selectedDate variable
-                        selectedDate = String.format("%02d/%02d/%04d", monthOfYear + 1, dayOfMonth, year);
-                        editTextDate.setText(selectedDate);
-                    }
+                (view, year1, monthOfYear, dayOfMonth) -> {
+                    // Store the selected date in the selectedDate variable
+                    selectedDate = String.format("%02d/%02d/%04d", monthOfYear + 1, dayOfMonth, year1);
+                    editTextDate.setText(selectedDate);
                 },
                 year, month, day
         );
