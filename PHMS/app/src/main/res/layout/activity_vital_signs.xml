@@ -28,13 +28,13 @@
       <TextView
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:text="Blood pressure (mmHg)" />
+          android:text="Blood pressure (Systolic/Diastolic mmHg)" />
 
       <EditText
           android:id="@+id/editTextBloodPressure"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:inputType="number" />
+          android:inputType="number|text" />
 
       <TextView
           android:layout_width="match_parent"

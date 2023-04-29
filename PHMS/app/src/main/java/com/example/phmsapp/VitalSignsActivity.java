@@ -1,5 +1,6 @@
 package com.example.phmsapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
@@ -77,7 +78,7 @@ public class VitalSignsActivity extends AppCompatActivity {
                 // Validate the entered values
                 if (bloodPressure.isEmpty() || heartRate.isEmpty() || oxygenSaturation.isEmpty() || BodyTemperature.isEmpty() || Date.isEmpty()) {
                     Toast.makeText(VitalSignsActivity.this, "Please enter all vital signs values", Toast.LENGTH_SHORT).show();
-                } else if (isNumeric(bloodPressure) || isNumeric(heartRate) || isNumeric(oxygenSaturation) || isNumeric(BodyTemperature) || isDateValid(Date, "MM/DD/YYYY")) {
+                } else if (!isNumberFormat(bloodPressure) || isNumeric(heartRate) || isNumeric(oxygenSaturation) || isNumeric(BodyTemperature) || isDateValid(Date, "MM/DD/YYYY")) {
                     Toast.makeText(VitalSignsActivity.this, "Please enter valid vital signs values", Toast.LENGTH_SHORT).show();
                 } else {
                     // Save the entered values
@@ -178,6 +179,22 @@ public class VitalSignsActivity extends AppCompatActivity {
         }
         return false;
     }
+
+    private boolean isNumberFormat(String value) {
+        String[] parts = value.split("/");
+        if (parts.length != 2) {
+            return false;
+        }
+        try {
+            Integer.parseInt(parts[0]);
+            Integer.parseInt(parts[1]);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+
 
     public static boolean isDateValid(String dateStr, String format) {
         try {
