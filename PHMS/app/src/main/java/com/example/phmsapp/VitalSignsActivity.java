@@ -1,10 +1,9 @@
 package com.example.phmsapp;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -13,18 +12,20 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import androidx.appcompat.app.AlertDialog;
 
-import java.util.ArrayList;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class VitalSignsActivity extends AppCompatActivity {
 
     private EditText editTextBloodPressure, editTextHeartRate, editTextOxygenSaturation, editTextBodyTemperature, editTextDate;
     private Button buttonSave, buttonHistory;
-    private TextView textViewSavedValues;
+
     private SharedPreferences sharedPreferences;
     private ArrayList<String> history;
 
@@ -35,6 +36,7 @@ public class VitalSignsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vital_signs);
+        setTitle("Vital Signs");
 
         editTextBloodPressure = findViewById(R.id.editTextBloodPressure);
         editTextHeartRate = findViewById(R.id.editTextHeartRate);
@@ -43,7 +45,6 @@ public class VitalSignsActivity extends AppCompatActivity {
         editTextDate = findViewById(R.id.editTextDate);
         buttonSave = findViewById(R.id.buttonSave);
         buttonHistory = findViewById(R.id.buttonHistory);
-        textViewSavedValues = findViewById(R.id.textViewSavedValues);
         sharedPreferences = getSharedPreferences("vital_signs", MODE_PRIVATE);
 
         // Load history
@@ -134,14 +135,30 @@ public class VitalSignsActivity extends AppCompatActivity {
                     AlertDialog.Builder builder = new AlertDialog.Builder(VitalSignsActivity.this);
                     builder.setTitle("History");
                     builder.setMessage("Last " + numEntriesToShow + " entries:\n" + historyToShow);
-                    builder.setPositiveButton("OK", null);
+                    builder.setPositiveButton("Clear history", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            // Clear the history
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            editor.remove("history");
+                            for (int i = 1; i <= 15; i++) {
+                                editor.remove("history_" + i);
+                            }
+                            editor.apply();
+                            history.clear();
+                            //textViewSavedValues.setText("");
+                            Toast.makeText(VitalSignsActivity.this, "History cleared", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    builder.setNegativeButton("OK", null);
                     AlertDialog dialog = builder.create();
                     dialog.show();
                 } else {
-                    Toast.makeText(VitalSignsActivity.this, "No history yet", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(VitalSignsActivity.this, "No history to show", Toast.LENGTH_SHORT).show();
                 }
             }
         });
+
 
 
     }
