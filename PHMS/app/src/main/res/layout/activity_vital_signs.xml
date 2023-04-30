@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#1F2223">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,55 +14,64 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Blood pressure (Systolic/Diastolic mmHg)" />
+            android:text="Blood pressure (Systolic/Diastolic mmHg)"
+            android:textColor="#FFFFFF"/>
 
         <EditText
             android:id="@+id/editTextBloodPressure"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="number|text"
-            android:hint="Enter blood pressure as Systolic/Diastolic" />
+            android:hint="Enter blood pressure as Systolic/Diastolic"
+            android:textColor="#FFFFFF"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Heart rate (bpm)" />
+            android:text="Heart rate (bpm)"
+            android:textColor="#FFFFFF"/>
 
         <EditText
             android:id="@+id/editTextHeartRate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="number"
-            android:hint="Enter heart rate" />
+            android:hint="Enter heart rate"
+            android:textColor="#FFFFFF"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Oxygen saturation (%)" />
+            android:text="Oxygen saturation (%)"
+            android:textColor="#FFFFFF"/>
 
         <EditText
             android:id="@+id/editTextOxygenSaturation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="number"
-            android:hint="Enter oxygen saturation" />
+            android:hint="Enter oxygen saturation"
+            android:textColor="#FFFFFF"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Body temperature (°F)" />
+            android:text="Body temperature (°F)"
+            android:textColor="#FFFFFF"/>
 
         <EditText
             android:id="@+id/editTextBodyTemperature"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
-            android:hint="Enter body temperature" />
+            android:hint="Enter body temperature"
+            android:textColor="#FFFFFF"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Date (MM/DD/YYYY)" />
+            android:text="Date (MM/DD/YYYY)"
+            android:textColor="#FFFFFF"/>
 
         <EditText
             android:id="@+id/editTextDate"
@@ -70,18 +81,25 @@
             android:clickable="true"
             android:inputType="none"
             android:hint="Press"
-            android:drawableRight="@drawable/ic_baseline_calendar_today_24" />
+            android:drawableRight="@drawable/ic_baseline_calendar_today_24"
+            android:textColor="#FFFFFF"/>
 
         <Button
             android:id="@+id/buttonSave"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Save" />
+            android:text="Save"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:textSize="18sp"
+            app:cornerRadius="10dp"/>
 
         <Button
             android:id="@+id/buttonHistory"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="History" />
+            android:text="History"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:textSize="18sp"
+            app:cornerRadius="10dp" />
     </LinearLayout>
 </RelativeLayout>

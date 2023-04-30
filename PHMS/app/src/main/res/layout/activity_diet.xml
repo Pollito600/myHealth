@@ -2,7 +2,9 @@
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#1F2223">
 
 
     <LinearLayout android:layout_width="match_parent"
@@ -15,6 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Food Name"
+            android:textColor="#FFFFFF"
             />
 
         <EditText
@@ -22,6 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Enter food"
+            android:textColor="#FFFFFF"
             />
 
         <TextView
@@ -29,6 +33,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Total Calories"
+            android:textColor="#FFFFFF"
             />
 
         <EditText
@@ -37,6 +42,7 @@
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
             android:hint="Enter calories for meal"
+            android:textColor="#FFFFFF"
             />
 
         <TextView
@@ -44,6 +50,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Time Eaten"
+            android:textColor="#FFFFFF"
             />
 
         <EditText
@@ -55,6 +62,7 @@
             android:clickable="true"
             android:inputType="none"
             android:hint="Press"
+            android:textColor="#FFFFFF"
             />
 
         <TextView
@@ -62,6 +70,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Weight"
+            android:textColor="#FFFFFF"
             />
 
         <EditText
@@ -70,6 +79,7 @@
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
             android:hint="Enter weight"
+            android:textColor="#FFFFFF"
             />
 
         <TextView
@@ -77,6 +87,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Daily Calorie Goal"
+            android:textColor="#FFFFFF"
             />
 
         <EditText
@@ -85,6 +96,7 @@
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
             android:hint="Enter daily calorie goal"
+            android:textColor="#FFFFFF"
             />
 
         <TextView
@@ -92,6 +104,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Date (MM/DD/YYYY)"
+            android:textColor="#FFFFFF"
             />
 
         <EditText
@@ -102,19 +115,26 @@
             android:clickable="true"
             android:inputType="none"
             android:hint="Press"
-            android:drawableRight="@drawable/ic_baseline_calendar_today_24" />
+            android:drawableRight="@drawable/ic_baseline_calendar_today_24"
+            android:textColor="#FFFFFF"/>
 
         <Button
             android:id="@+id/buttonSave"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Save Diet"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:textSize="18sp"
+            app:cornerRadius="10dp"
             />
 
         <Button
             android:id="@+id/buttonHistory"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="History" />
+            android:text="History"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:textSize="18sp"
+            app:cornerRadius="10dp"/>
     </LinearLayout>
 </RelativeLayout>
