@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -32,8 +34,6 @@ public class DietActivity extends AppCompatActivity {
     private EditText editTextFoodName, editTextDate, editTextTotalCalories,
             editTextTimeEaten, editTextWeight, editTextDailyCalorieGoal;
 
-    private TextView textViewSavedValues;
-
     private SharedPreferences sharedPreferences;
 
     private Button buttonSave, buttonHistory;
@@ -47,6 +47,7 @@ public class DietActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diet);
+        setTitle("Diet");
 
         editTextFoodName = findViewById(R.id.editTextFoodName);
         editTextTotalCalories = findViewById(R.id.editTextTotalCalories);
@@ -54,8 +55,6 @@ public class DietActivity extends AppCompatActivity {
         editTextWeight = findViewById(R.id.editTextWeight);
         editTextDailyCalorieGoal = findViewById(R.id.editTextDailyCalorieGoal);
         editTextDate = findViewById(R.id.editTextDate);
-
-        textViewSavedValues = findViewById(R.id.textViewSavedValues);
 
         buttonSave = findViewById(R.id.buttonSave);
         buttonHistory = findViewById(R.id.buttonHistory);
@@ -95,7 +94,52 @@ public class DietActivity extends AppCompatActivity {
                 String dailyCalorieGoal = editTextDailyCalorieGoal.getText().toString().trim();
                 String date = selectedDate.trim();
 
+                // Check if the entered values are valid and if not, make the field turn red
+                boolean isInvalid = false;
+                if (foodName.isEmpty()) {
+                    editTextFoodName.setHintTextColor(Color.RED);
+                    isInvalid = true;
+                } else {
+                    editTextFoodName.setHintTextColor(Color.TRANSPARENT);
+                }
+                if (totalCalories.isEmpty() || !isNumeric(totalCalories)) {
+                    editTextTotalCalories.setHintTextColor(Color.RED);
+                    isInvalid = true;
+                } else {
+                    editTextTotalCalories.setHintTextColor(Color.TRANSPARENT);
+                }
+                if (timeEaten.isEmpty()) {
+                    editTextTimeEaten.setHintTextColor(Color.RED);
+                    isInvalid = true;
+                } else {
+                    editTextTimeEaten.setHintTextColor(Color.TRANSPARENT);
+                }
+                if (weight.isEmpty() || !isNumeric(weight)) {
+                    editTextWeight.setHintTextColor(Color.RED);
+                    isInvalid = true;
+                } else {
+                    editTextWeight.setHintTextColor(Color.TRANSPARENT);
+                }
+                if (dailyCalorieGoal.isEmpty() || !isNumeric(dailyCalorieGoal)) {
+                    editTextDailyCalorieGoal.setHintTextColor(Color.RED);
+                    isInvalid = true;
+                } else {
+                    editTextDailyCalorieGoal.setHintTextColor(Color.TRANSPARENT);
+                }
+                if (date.isEmpty() || isDateValid(date, "MM/DD/YYYY")) {
+                    editTextDate.setHintTextColor(Color.RED);
+                    isInvalid = true;
+                } else {
+                    editTextDate.setHintTextColor(Color.TRANSPARENT);
+                }
+
+                if (isInvalid) {
+                    Toast.makeText(DietActivity.this, "Please enter valid diet values", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 int numTotalCal, numDailyCalGoal;
+
                 numTotalCal = Integer.parseInt(totalCalories);
                 numDailyCalGoal = Integer.parseInt(dailyCalorieGoal);
 
@@ -104,44 +148,40 @@ public class DietActivity extends AppCompatActivity {
                     Toast.makeText(DietActivity.this, "WARNING: Total Calories intake is GREATER than Daily Calorie Goal", Toast.LENGTH_SHORT).show();
                 }
 
-                if (foodName.isEmpty() || totalCalories.isEmpty() || timeEaten.isEmpty() || weight.isEmpty() || dailyCalorieGoal.isEmpty() || date.isEmpty()) {
-                    Toast.makeText(DietActivity.this, "Please enter ALL diet values", Toast.LENGTH_SHORT).show();
-                } else if (!isNumeric(totalCalories) || !isNumeric(weight) || !isNumeric(dailyCalorieGoal) || isDateValid(date, "MM/DD/YYYY")) {
-                    Toast.makeText(DietActivity.this, "Please enter a NUMBER value for necessary fields", Toast.LENGTH_SHORT).show();
-                } else {
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putString("foodName", foodName);
-                    editor.putString("totalCalories", totalCalories);
-                    editor.putString("timeEaten", timeEaten);
-                    editor.putString("weight", weight);
-                    editor.putString("dailyCalorieGoal", dailyCalorieGoal);
-                    editor.putString("date", date);
-                    editor.apply();
+                // Save the entered values
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("foodName", foodName);
+                editor.putString("totalCalories", totalCalories);
+                editor.putString("timeEaten", timeEaten);
+                editor.putString("weight", weight);
+                editor.putString("dailyCalorieGoal", dailyCalorieGoal);
+                editor.putString("date", date);
+                editor.apply();
 
-                    String savedValues = "\n- Food Name: " + foodName +
-                            "\n- Total Calories: " + totalCalories + "\n- Time Eaten: " + timeEaten + "\n- Weight: " + weight +
-                            "\n- Daily Calorie Goal: " + dailyCalorieGoal + "\n- Date: " + date;
-                    history.add(0, savedValues);
-                    if (history.size() > 15) {
-                        history.remove(history.size() - 1);
-                    }
-                    StringBuilder historyString = new StringBuilder();
-                    for (int i = 0; i < history.size(); i++) {
-                        historyString.append(history.get(i)).append("\n");
-                    }
-                    editor.putString("history", historyString.toString().trim());
-                    editor.apply();
-
-                    Toast.makeText(DietActivity.this, "Diet saved: " + savedValues, Toast.LENGTH_SHORT).show();
-
-                    // Clear the fields
-                    editTextFoodName.getText().clear();
-                    editTextTotalCalories.getText().clear();
-                    editTextTimeEaten.getText().clear();
-                    editTextWeight.getText().clear();
-                    editTextDailyCalorieGoal.getText().clear();
-                    editTextDate.getText().clear();
+                // Get the saved values from history and add the new entry to history
+                String savedValues = "\n- Food Name: " + foodName +
+                        "\n- Total Calories: " + totalCalories + "\n- Time Eaten: " + timeEaten + "\n- Weight: " + weight +
+                        "\n- Daily Calorie Goal: " + dailyCalorieGoal + "\n- Date: " + date;
+                history.add(0, savedValues);
+                if (history.size() > 15) {
+                    history.remove(history.size() - 1);
                 }
+                StringBuilder historyString = new StringBuilder();
+                for (int i = 0; i < history.size(); i++) {
+                    historyString.append(history.get(i)).append("\n");
+                }
+                editor.putString("history", historyString.toString().trim());
+                editor.apply();
+
+                Toast.makeText(DietActivity.this, "Diet saved: " + savedValues, Toast.LENGTH_SHORT).show();
+
+                // Clear the fields
+                editTextFoodName.getText().clear();
+                editTextTotalCalories.getText().clear();
+                editTextTimeEaten.getText().clear();
+                editTextWeight.getText().clear();
+                editTextDailyCalorieGoal.getText().clear();
+                editTextDate.getText().clear();
             }
         });
 
@@ -162,7 +202,21 @@ public class DietActivity extends AppCompatActivity {
                     AlertDialog.Builder builder = new AlertDialog.Builder(DietActivity.this);
                     builder.setTitle("History");
                     builder.setMessage("Last " + numEntriesToShow + " entries:\n" + historyToShow);
-                    builder.setPositiveButton("OK", null);
+                    builder.setPositiveButton("Clear history", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            // Clear the history
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            editor.remove("history");
+                            for (int i = 1; i <= 15; i++) {
+                                editor.remove("history_" + i);
+                            }
+                            editor.apply();
+                            history.clear();
+                            Toast.makeText(DietActivity.this, "History cleared", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    builder.setNegativeButton("OK", null);
                     AlertDialog dialog = builder.create();
                     dialog.show();
                 } else {
