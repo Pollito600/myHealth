@@ -2,22 +2,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-  <TextView
-      android:id="@+id/textViewSavedValues"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:textSize="18sp"
-      android:textStyle="bold"
-      android:layout_marginTop="16dp"
-      android:layout_marginLeft="16dp"
-      android:layout_marginRight="16dp"
-      android:layout_marginBottom="8dp"
-      android:text="Vital Signs" />
-
-  <ScrollView
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_below="@id/textViewSavedValues">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -25,75 +9,79 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-      <TextView
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:text="Blood pressure (mmHg)" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Blood pressure (Systolic/Diastolic mmHg)" />
 
-      <EditText
-          android:id="@+id/editTextBloodPressure"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:inputType="number" />
+        <EditText
+            android:id="@+id/editTextBloodPressure"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number|text"
+            android:hint="Enter blood pressure as Systolic/Diastolic" />
 
-      <TextView
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:text="Heart rate (bpm)" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Heart rate (bpm)" />
 
-      <EditText
-          android:id="@+id/editTextHeartRate"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:inputType="number" />
+        <EditText
+            android:id="@+id/editTextHeartRate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="Enter heart rate" />
 
-      <TextView
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:text="Oxygen saturation (%)" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Oxygen saturation (%)" />
 
-      <EditText
-          android:id="@+id/editTextOxygenSaturation"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:inputType="number" />
+        <EditText
+            android:id="@+id/editTextOxygenSaturation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="Enter oxygen saturation" />
 
-      <TextView
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:text="Body temperature (°F)" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Body temperature (°F)" />
 
-      <EditText
-          android:id="@+id/editTextBodyTemperature"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:inputType="numberDecimal" />
+        <EditText
+            android:id="@+id/editTextBodyTemperature"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:hint="Enter body temperature" />
 
-      <TextView
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:text="Date (MM/DD/YYYY)" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Date (MM/DD/YYYY)" />
 
-      <EditText
-          android:id="@+id/editTextDate"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:focusable="false"
-          android:clickable="true"
-          android:inputType="none"
-          android:drawableRight="@drawable/ic_baseline_calendar_today_24" />
+        <EditText
+            android:id="@+id/editTextDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="false"
+            android:clickable="true"
+            android:inputType="none"
+            android:hint="Press"
+            android:drawableRight="@drawable/ic_baseline_calendar_today_24" />
 
-      <Button
-          android:id="@+id/buttonSave"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:text="Save" />
+        <Button
+            android:id="@+id/buttonSave"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Save" />
 
-      <Button
-          android:id="@+id/buttonHistory"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:text="History" />
+        <Button
+            android:id="@+id/buttonHistory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="History" />
     </LinearLayout>
-  </ScrollView>
 </RelativeLayout>

@@ -1,14 +1,25 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#1F2223">
 
     <Button
         android:id="@+id/addMedicationButton"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="63dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        app:icon="@drawable/add"
+        app:iconSize="45dp"
         android:text="Add Medication"
+        android:textSize="24sp"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:textColor="#C5C2BB"
+        app:cornerRadius="12dp"
         android:textAlignment="center" />
 
 
@@ -16,6 +27,8 @@
         android:id="@+id/medicationList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/addMedicationButton"/>
+        android:layout_below="@id/addMedicationButton"
+        android:layout="@layout/custom_list_item"
+        android:textColor="#C5C2BB"/>
 
 </RelativeLayout>

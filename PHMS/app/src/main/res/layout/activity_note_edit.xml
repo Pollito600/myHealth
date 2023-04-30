@@ -3,20 +3,25 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="#1F2223">
 
     <EditText
         android:id="@+id/edit_note_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Title"
-        android:textSize="20sp"/>
+        android:textColor="#978f81"
+        android:textColorHint="#978f81"
+        android:textSize="24sp"/>
 
     <EditText
         android:id="@+id/edit_note_body"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Body"
+        android:textColor="#978f81"
+        android:textColorHint="#978f81"
         android:textSize="16sp"/>
 
     <LinearLayout
@@ -29,6 +34,7 @@
             android:id="@+id/delete_note_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
             android:text="Delete"/>
 
         <Button

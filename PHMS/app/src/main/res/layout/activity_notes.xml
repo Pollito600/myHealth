@@ -2,18 +2,27 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:layout_margin="16dp">
+    android:background="#1F2223">
 
     <!-- New Note button -->
     <Button
         android:id="@+id/new_note_button"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="63dp"
+        app:icon="@drawable/newnote"
+        app:iconSize="45dp"
         android:text="New Note"
+        android:textSize="24sp"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:textColor="#C5C2BB"
+        app:cornerRadius="12dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="16dp"
-        android:layout_marginTop="16dp"/>
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"/>
 
     <!-- List of notes -->
     <ListView
@@ -22,7 +31,10 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:dividerHeight="1dp"
-        android:background="@android:color/white"
-        android:layout_marginTop="16dp"/>
+        android:background="#1F2223"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif-condensed"
+
+        android:layout="@layout/custom_list_item"/>
 
 </LinearLayout>
