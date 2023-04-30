@@ -23,7 +23,8 @@
             android:layout_height="wrap_content"
             android:inputType="number|text"
             android:hint="Enter blood pressure as Systolic/Diastolic"
-            android:textColor="#FFFFFF"/>
+            android:textColor="#FFFFFF"
+            android:textColorHint="#C5C2BB"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -37,7 +38,8 @@
             android:layout_height="wrap_content"
             android:inputType="number"
             android:hint="Enter heart rate"
-            android:textColor="#FFFFFF"/>
+            android:textColor="#FFFFFF"
+            android:textColorHint="#C5C2BB"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -51,7 +53,8 @@
             android:layout_height="wrap_content"
             android:inputType="number"
             android:hint="Enter oxygen saturation"
-            android:textColor="#FFFFFF"/>
+            android:textColor="#FFFFFF"
+            android:textColorHint="#C5C2BB"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -65,7 +68,8 @@
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
             android:hint="Enter body temperature"
-            android:textColor="#FFFFFF"/>
+            android:textColor="#FFFFFF"
+            android:textColorHint="#C5C2BB"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -82,7 +86,8 @@
             android:inputType="none"
             android:hint="Press"
             android:drawableRight="@drawable/ic_baseline_calendar_today_24"
-            android:textColor="#FFFFFF"/>
+            android:textColor="#FFFFFF"
+            android:textColorHint="#C5C2BB"/>
 
         <Button
             android:id="@+id/buttonSave"

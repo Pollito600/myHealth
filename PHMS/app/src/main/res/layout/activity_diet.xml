@@ -25,6 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Enter food"
+            android:textColorHint="#C5C2BB"
             android:textColor="#FFFFFF"
             />
 
@@ -42,6 +43,7 @@
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
             android:hint="Enter calories for meal"
+            android:textColorHint="#C5C2BB"
             android:textColor="#FFFFFF"
             />
 
@@ -62,6 +64,7 @@
             android:clickable="true"
             android:inputType="none"
             android:hint="Press"
+            android:textColorHint="#C5C2BB"
             android:textColor="#FFFFFF"
             />
 
@@ -79,6 +82,7 @@
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
             android:hint="Enter weight"
+            android:textColorHint="#C5C2BB"
             android:textColor="#FFFFFF"
             />
 
@@ -96,6 +100,7 @@
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
             android:hint="Enter daily calorie goal"
+            android:textColorHint="#C5C2BB"
             android:textColor="#FFFFFF"
             />
 
@@ -116,6 +121,7 @@
             android:inputType="none"
             android:hint="Press"
             android:drawableRight="@drawable/ic_baseline_calendar_today_24"
+            android:textColorHint="#C5C2BB"
             android:textColor="#FFFFFF"/>
 
         <Button
