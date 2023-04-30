@@ -76,34 +76,34 @@ public class VitalSignsActivity extends AppCompatActivity {
                 // Check if the entered values are valid and if not, make the field turn red
                 boolean isInvalid = false;
                 if (bloodPressure.isEmpty() || !isNumberFormat(bloodPressure)) {
-                    editTextBloodPressure.setBackgroundColor(Color.RED);
+                    editTextBloodPressure.setHintTextColor(Color.RED);
                     isInvalid = true;
                 } else {
-                    editTextBloodPressure.setBackgroundColor(Color.TRANSPARENT);
+                    editTextBloodPressure.setHintTextColor(Color.TRANSPARENT);
                 }
                 if (heartRate.isEmpty() || isNumeric(heartRate)) {
-                    editTextHeartRate.setBackgroundColor(Color.RED);
+                    editTextHeartRate.setHintTextColor(Color.RED);
                     isInvalid = true;
                 } else {
-                    editTextHeartRate.setBackgroundColor(Color.TRANSPARENT);
+                    editTextHeartRate.setHintTextColor(Color.TRANSPARENT);
                 }
                 if (oxygenSaturation.isEmpty() || isNumeric(oxygenSaturation)) {
-                    editTextOxygenSaturation.setBackgroundColor(Color.RED);
+                    editTextOxygenSaturation.setHintTextColor(Color.RED);
                     isInvalid = true;
                 } else {
-                    editTextOxygenSaturation.setBackgroundColor(Color.TRANSPARENT);
+                    editTextOxygenSaturation.setHintTextColor(Color.TRANSPARENT);
                 }
                 if (BodyTemperature.isEmpty() || isNumeric(BodyTemperature)) {
-                    editTextBodyTemperature.setBackgroundColor(Color.RED);
+                    editTextBodyTemperature.setHintTextColor(Color.RED);
                     isInvalid = true;
                 } else {
-                    editTextBodyTemperature.setBackgroundColor(Color.TRANSPARENT);
+                    editTextBodyTemperature.setHintTextColor(Color.TRANSPARENT);
                 }
                 if (Date.isEmpty() || isDateValid(Date, "MM/DD/YYYY")) {
-                    editTextDate.setBackgroundColor(Color.RED);
+                    editTextDate.setHintTextColor(Color.RED);
                     isInvalid = true;
                 } else {
-                    editTextDate.setBackgroundColor(Color.TRANSPARENT);
+                    editTextDate.setHintTextColor(Color.TRANSPARENT);
                 }
 
                 if (isInvalid) {
@@ -187,8 +187,6 @@ public class VitalSignsActivity extends AppCompatActivity {
                 }
             }
         });
-
-
 
     }
 
