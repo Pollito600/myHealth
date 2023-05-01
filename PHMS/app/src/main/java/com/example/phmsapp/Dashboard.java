@@ -12,18 +12,18 @@ import android.widget.Button;
 
 public class Dashboard extends AppCompatActivity {
 
-    private Button dashNotesBtn, dashDietBtn, dashMedicationBtn, dashSearchBtn, dashVitalSignsBtn;
+    private Button dashNotesBtn, dashDietBtn, dashMedicationBtn, dashSearchBtn, dashVitalSignsBtn, dashbtnContacts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
-        setTitle("myHealth");
 
         dashNotesBtn = findViewById(R.id.btnNotes);
         dashDietBtn = findViewById(R.id.btnDiet);
         dashMedicationBtn = findViewById(R.id.btnMedication);
         dashVitalSignsBtn = findViewById(R.id.btnVitalSigns);
+        dashbtnContacts = findViewById(R.id.btnContacts);
         dashNotesBtn.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -55,6 +55,15 @@ public class Dashboard extends AppCompatActivity {
             public void onClick(View v)
             {
                 startActivity(new Intent(Dashboard.this, VitalSignsActivity.class));
+            }
+        });
+
+        dashbtnContacts.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                startActivity(new Intent(Dashboard.this, ContactsActivity.class));
             }
         });
     }
