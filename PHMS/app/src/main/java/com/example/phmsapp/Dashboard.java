@@ -18,6 +18,7 @@ public class Dashboard extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
+        setTitle("myHealth");
 
         dashNotesBtn = findViewById(R.id.btnNotes);
         dashDietBtn = findViewById(R.id.btnDiet);

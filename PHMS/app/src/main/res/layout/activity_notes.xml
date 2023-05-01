@@ -1,28 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="#1F2223">
+    android:background="#C5C2BB">
 
-    <!-- New Note button -->
-    <Button
-        android:id="@+id/new_note_button"
+    <!-- Search layout -->
+    <LinearLayout
+        android:id="@+id/search_layout"
         android:layout_width="match_parent"
-        android:layout_height="63dp"
-        app:icon="@drawable/newnote"
-        app:iconSize="45dp"
-        android:text="New Note"
-        android:textSize="24sp"
-        android:fontFamily="sans-serif-condensed-medium"
-        android:textColor="#C5C2BB"
-        app:cornerRadius="12dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"/>
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="8dp">
+
+        <SearchView
+            android:id="@+id/search_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:iconifiedByDefault="false"
+            android:queryHint="Search notes"
+            android:textColor="#C5C2BB" />
+
+        <Button
+            android:id="@+id/search_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Search"
+            android:textColor="#C5C2BB"
+            app:cornerRadius="12dp"/>
+
+    </LinearLayout>
+
+    <!-- Buttons layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="8dp">
+
+        <Button
+            android:id="@+id/show_all_notes_button"
+            android:layout_width="0dp"
+            android:layout_height="63dp"
+            android:layout_marginEnd="16dp"
+            android:layout_weight="1"
+            android:minWidth="30dp"
+            android:text="View All"
+            android:textSize="24sp"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:textColor="#C5C2BB"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            app:cornerRadius="12dp"/>
+
+        <Button
+            android:id="@+id/new_note_button"
+            android:layout_width="0dp"
+            android:layout_height="63dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:minWidth="30dp"
+            android:text="New Note"
+            android:textColor="#C5C2BB"
+            android:textSize="20sp"
+            app:icon="@drawable/newnote"
+            app:iconSize="30dp"
+            app:cornerRadius="12dp"
+            />
+
+    </LinearLayout>
 
     <!-- List of notes -->
     <ListView
@@ -31,10 +84,9 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:dividerHeight="1dp"
-        android:background="#1F2223"
+        android:background="#C5C2BB"
         android:layout_marginTop="16dp"
         android:fontFamily="sans-serif-condensed"
-
         android:layout="@layout/custom_list_item"/>
 
 </LinearLayout>

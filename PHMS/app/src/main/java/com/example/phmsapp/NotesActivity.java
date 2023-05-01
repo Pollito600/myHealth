@@ -3,36 +3,48 @@ package com.example.phmsapp;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
-
 import android.widget.ArrayAdapter;
+import android.widget.SearchView;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.crashlytics.buildtools.reloc.com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 public class NotesActivity extends AppCompatActivity {
     private Button newNoteBtn;
+
+    private Button showAllNotesBtn;
+    private SearchView searchView;
+    private Button searchButton;
     private ListView notesListView;
     private ArrayAdapter<String> adapter;
     private ArrayList<String> notesList;
+
     private SharedPreferences sharedPreferences;
     private static final String NOTES_PREFS = "notes_prefs";
     private static final String NOTES_LIST_KEY = "notes_list_key";
     private void saveNotes(ArrayList<String> notesList) {
-        SharedPreferences sharedPreferences = getSharedPreferences("notes", MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences("notes_prefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
         // convert the ArrayList to a Set to save it in SharedPreferences
@@ -53,6 +65,47 @@ public class NotesActivity extends AppCompatActivity {
         editor.apply();
         Log.d("NotesActivity", "Deleted note at position " + position);
     }
+    private void performSearch(String query) {
+        // Load notes from shared preferences
+        SharedPreferences sharedPreferences = getSharedPreferences(NOTES_PREFS, MODE_PRIVATE);
+        String notesJson = sharedPreferences.getString(NOTES_LIST_KEY, "");
+        ArrayList<String> filteredNotesList = new ArrayList<String>();
+        if (!notesJson.isEmpty()) {
+            notesList = new Gson().fromJson(notesJson, new TypeToken<ArrayList<String>>(){}.getType());
+        }
+
+        // Filter notes based on search query
+        if (query.isEmpty()) {
+            filteredNotesList = notesList;
+        } else {
+            for (int i = notesList.size() - 1; i >= 0; i--) {
+                String note = notesList.get(i);
+                if (!note.toLowerCase().contains(query)) {
+                    notesList.remove(i);
+                } else {
+                    filteredNotesList.add(note);
+                }
+            }
+        }
+
+        // Update adapter with filtered notes
+        adapter.clear();
+        adapter.addAll(filteredNotesList);
+    }
+
+    private void showAllNotes() {
+        // Load notes from shared preferences
+        SharedPreferences sharedPreferences = getSharedPreferences(NOTES_PREFS, MODE_PRIVATE);
+        String notesJson = sharedPreferences.getString(NOTES_LIST_KEY, "");
+        ArrayList<String> allNotesList = new ArrayList<String>();
+        if (!notesJson.isEmpty()) {
+            allNotesList = new Gson().fromJson(notesJson, new TypeToken<ArrayList<String>>(){}.getType());
+        }
+
+        // Update adapter with all notes
+        adapter.clear();
+        adapter.addAll(allNotesList);
+    }
 
 
 
@@ -62,10 +115,12 @@ public class NotesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notes);
+        setTitle("Notes");
 
         newNoteBtn = findViewById(R.id.new_note_button);
         notesListView = findViewById(R.id.notes_list_view);
         notesList = new ArrayList<String>();
+        showAllNotesBtn = findViewById(R.id.show_all_notes_button);
 
         // Initialize shared preferences
         sharedPreferences = getSharedPreferences(NOTES_PREFS, MODE_PRIVATE);
@@ -78,6 +133,42 @@ public class NotesActivity extends AppCompatActivity {
 
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, notesList);
         notesListView.setAdapter(adapter);
+
+        searchView = findViewById(R.id.search_view);
+        searchButton = findViewById(R.id.search_button);
+
+        // Set query text listener for the search view
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                // Perform search
+                performSearch(query);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+
+
+        showAllNotesBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showAllNotes();
+            }
+        });
+
+        // Set click listener for the search button
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String query = searchView.getQuery().toString();
+                performSearch(query);
+            }
+        });
+
 
         newNoteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,6 +218,19 @@ public class NotesActivity extends AppCompatActivity {
                 builder.show();
             }
         });
+
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Get the search query from the search view
+                String query = searchView.getQuery().toString().toLowerCase();
+
+                // Perform search operation
+                performSearch(query);
+            }
+        });
+
+
 
         notesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

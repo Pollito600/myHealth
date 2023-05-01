@@ -84,6 +84,7 @@ public class MedicationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_medication);
+        setTitle("Medication");
 
         Button addMedicationButton = findViewById(R.id.addMedicationButton);
         addMedicationButton.setOnClickListener(new View.OnClickListener() {
