@@ -1,5 +1,7 @@
 package com.example.phmsapp;
 import com.example.phmsapp.ContactsAdapter;
+import com.google.firebase.crashlytics.buildtools.reloc.com.google.common.reflect.TypeToken;
+import com.google.gson.Gson;
 
 
 import androidx.appcompat.app.AlertDialog;
@@ -7,7 +9,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -15,6 +19,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class ContactsActivity extends AppCompatActivity {
@@ -30,16 +35,29 @@ public class ContactsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_contacts);
         setTitle("Contacts");
 
-        contacts = new ArrayList<>();
+        SharedPreferences sharedPreferences = getSharedPreferences("contacts", Context.MODE_PRIVATE);
+        Gson gson = new Gson();
+
+        String contactsJson = sharedPreferences.getString("contactsList", "");
+        Type type = new TypeToken<ArrayList<Contact>>() {}.getType();
+        contacts = gson.fromJson(contactsJson, type);
+
+        if (contacts == null) {
+            contacts = new ArrayList<>();
+        }
+
         adapter = new ContactsAdapter(contacts);
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        setContacts(); // Call setContacts() method to load and display the contacts
+
         nameEditText = findViewById(R.id.name_edit_text);
         phoneEditText = findViewById(R.id.phone_edit_text);
         emailEditText = findViewById(R.id.email_edit_text);
         addressEditText = findViewById(R.id.address_edit_text);
+
 
         Button addButton = findViewById(R.id.add_button);
         addButton.setOnClickListener(new View.OnClickListener() {
@@ -85,6 +103,7 @@ public class ContactsActivity extends AppCompatActivity {
                 contacts.add(contact);
                 adapter.notifyItemInserted(contacts.size() - 1);
                 clearFields();
+                saveContacts();
             }
         });
 
@@ -106,10 +125,37 @@ public class ContactsActivity extends AppCompatActivity {
                 builder.setItems(contactNames, (dialog, which) -> {
                     contacts.remove(which);
                     adapter.notifyItemRemoved(which);
+                    saveContacts();
                 });
                 builder.create().show();
             }
         });
+    }
+
+    private void saveContacts() {
+        SharedPreferences prefs = getSharedPreferences("myContacts", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(contacts);
+        editor.putString("contacts", json);
+        editor.apply();
+    }
+
+    private void loadContacts() {
+        SharedPreferences prefs = getSharedPreferences("myContacts", MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = prefs.getString("contacts", "");
+        Type type = new TypeToken<ArrayList<Contact>>(){}.getType();
+        contacts = gson.fromJson(json, type);
+        if (contacts == null) {
+            contacts = new ArrayList<>();
+        }
+    }
+
+    private void setContacts() {
+        loadContacts();
+        adapter = new ContactsAdapter(contacts);
+        recyclerView.setAdapter(adapter);
     }
 
     private void clearFields() {
