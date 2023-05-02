@@ -61,13 +61,7 @@ public class DietActivity extends AppCompatActivity {
 
         sharedPreferences = getSharedPreferences("diet", MODE_PRIVATE);
 
-        history = new ArrayList<>();
-        for (int i = 1; i <= 15; i++) {
-            String historyItem = sharedPreferences.getString("history_" + i, "");
-            if (!historyItem.isEmpty()) {
-                history.add(historyItem);
-            }
-        }
+        loadHistory();
 
         editTextDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -300,6 +294,40 @@ public class DietActivity extends AppCompatActivity {
             // If parsing fails, return False
             return false;
         }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        // Save history
+        saveHistory();
+    }
+
+    private void loadHistory() {
+        // Load history from SharedPreferences
+        history = new ArrayList<>();
+        for (int i = 1; i <= 15; i++) {
+            String historyItem = sharedPreferences.getString("history_" + i, "");
+            if (!historyItem.isEmpty()) {
+                history.add(historyItem);
+            }
+        }
+
+        // Set the history text in the button
+        StringBuilder historyString = new StringBuilder();
+        for (int i = 0; i < history.size(); i++) {
+            historyString.append(history.get(i)).append("\n");
+        }
+    }
+
+    private void saveHistory() {
+        // Save history to SharedPreferences
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        for (int i = 0; i < history.size(); i++) {
+            editor.putString("history_" + (i + 1), history.get(i));
+        }
+        editor.apply();
     }
 
 }
